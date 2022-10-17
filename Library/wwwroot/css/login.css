@@ -1,0 +1,6 @@
+.jumbotron{
+  transform: translateY(40%);
+  width:60%;
+  margin: auto;
+  background-color: #0069d9;
+}
