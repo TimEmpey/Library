@@ -6,13 +6,13 @@ using Library.ViewModels;
 
 namespace Library.Controllers
 {
-  public class AccountController : Controller
+  public class AccountsController : Controller
   {
     private readonly LibraryContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, LibraryContext db)
+    public AccountsController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, LibraryContext db)
     {
       _userManager = userManager;
       _signInManager = signInManager;
@@ -32,7 +32,7 @@ namespace Library.Controllers
     [HttpPost]
     public async Task<ActionResult> Login(LoginViewModel model)
     {
-      Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+      Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
       if (result.Succeeded)
       {
         return RedirectToAction("Index");

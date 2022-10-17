@@ -2,4 +2,18 @@
   @Html.ActionLink("Home", "Index", "Home") | 
   @Html.ActionLink("All Books", "Index", "Books") | 
   @Html.ActionLink("All Items", "Index", "Items") |
+  <div id="header-right">
+    @if (User.Identity.IsAuthenticated)
+    {
+      @using (Html.BeginForm("LogOff", "Account"))
+      {
+        <input type="submit" class="btn btn-default" value="Log out" /> <span> |</span>
+      }
+    }
+    else
+    {
+      @Html.ActionLink("Register", "Register", "Accounts", new {@class="btn btn-primary"})<span> |</span>
+      @Html.ActionLink("Log in", "Login", "Accounts", new {@class="btn btn-primary"})<span> |</span>
+    }
+  </div>
 </div>

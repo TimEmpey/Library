@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Security.Claims
+
+<h2>Authentication with Identity</h2>
+<hr />
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Hello @User.Identity.Name!</p>
+
+  @if(@Model.JoinBookPat.Count == 0)
+  {
+    <p>No books have been checked out!</p>
+  }
+  else
+  {
+    <h4>Books You Have:</h4>
+    <ul>
+    @foreach(var join in Model.JoinBookPat)
+    {
+      <li>@Html.ActionLink($"{join.Book.Title}", "Details", new { id = join.Book.BookId })</li>
+      <ul>
+        <li>@Html.ActionLink($"{join.Book.Genre}", "Details", new { id = join.Book.BookId })</li>
+        <li>@Html.ActionLink($"{join.Book.AuthorFirst}" + " " + $"{join.Book.AuthorLast}", "Details", new { id = join.Book.BookId })</li>
+      </ul>
+    }
+    </ul>
+  }
+}
+else
+{
+    <p>@Html.ActionLink("Login", "login")</p>
+    <p>@Html.ActionLink("Register", "Register")</p>
+}

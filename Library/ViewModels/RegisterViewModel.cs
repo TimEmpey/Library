@@ -4,10 +4,17 @@ namespace Library.ViewModels
 {
   public class RegisterViewModel
   {
-
     [Display(Name = "UserName")]
     [Required(ErrorMessage = "User name is required")]
     public string UserName { get; set; }
+
+    [Display(Name = "First Name")]
+    [Required(ErrorMessage = "First name is required")]
+    public string PatronFirst { get; set; }
+
+    [Display(Name = "Last Name")]
+    [Required(ErrorMessage = "Last name is required")]
+    public string PatronLast { get; set; }
 
     [Required(ErrorMessage = "Email address is required")]
     [DataType(DataType.EmailAddress)]
@@ -33,12 +40,6 @@ namespace Library.ViewModels
     [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
     public string ConfirmPassword { get; set; }
 
-    [Display(Name = "First Name")]
-    [Required(ErrorMessage = "First name is required")]
-    public string PatronFirst { get; set; }
 
-    [Display(Name = "Last Name")]
-    [Required(ErrorMessage = "Last name is required")]
-    public string PatronLast { get; set; }
   }
 }
