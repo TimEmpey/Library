@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 
 namespace Library.Models
-{
+{ 
   public class Book
   {
     public Book()
     {
-      this.JoinBookPat = new HashSet<BookPatron>();
+      this.UserId = null; //null belongs to library
     }
 
     public int BookId { get; set; }
@@ -15,7 +15,6 @@ namespace Library.Models
     public string AuthorFirst { get; set; }
     public string AuthorLast { get; set; }
     public virtual ApplicationUser User { get; set; }
-
-    public virtual ICollection<BookPatron> JoinBookPat { get; }
+    public string UserId { get; set; }
   }
 }

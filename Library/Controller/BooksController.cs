@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Library.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library.Controllers
 {
+  [Authorize]
   public class BooksController : Controller
   {
     private readonly LibraryContext _db;
@@ -37,8 +39,6 @@ namespace Library.Controllers
     public ActionResult Details(int id)
     {
       var thisBook = _db.Books
-          .Include(book => book.JoinBookPat)
-          .ThenInclude(join => join.Patron)
           .FirstOrDefault(book => book.BookId == id);
       return View(thisBook);
     }
@@ -70,5 +70,21 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    // public ActionResult Checkout()
+    //   {
+    //     ViewBag.UserId = new SelectList(_db.Users, "UserId");
+    //     return View();
+    //   }
+
+    //   [HttpPost]
+    //   public ActionResult AddToUser(int UserId, int BookId)
+    //   {
+    //     BookUser bookuser = new BookUser(){UserId = UserId, BookId = BookId};
+    //     _db.BookUser.Add(bookuser);
+    //     _db.SaveChanges();
+    //     return RedirectToAction("Index", "Books");
+    // }
+
   }
 }

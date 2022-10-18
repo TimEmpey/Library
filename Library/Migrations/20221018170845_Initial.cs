@@ -154,7 +154,7 @@ namespace Library.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Book",
+                name: "Books",
                 columns: table => new
                 {
                     BookId = table.Column<int>(type: "int", nullable: false)
@@ -167,60 +167,13 @@ namespace Library.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.BookId);
+                    table.PrimaryKey("PK_Books", x => x.BookId);
                     table.ForeignKey(
-                        name: "FK_Book_AspNetUsers_UserId",
+                        name: "FK_Books_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Patron",
-                columns: table => new
-                {
-                    PatronId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PatronFirst = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    PatronLast = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Patron", x => x.PatronId);
-                    table.ForeignKey(
-                        name: "FK_Patron_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookPatron",
-                columns: table => new
-                {
-                    BookPatronId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    BookId = table.Column<int>(type: "int", nullable: false),
-                    PatronId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookPatron", x => x.BookPatronId);
-                    table.ForeignKey(
-                        name: "FK_BookPatron_Book_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Book",
-                        principalColumn: "BookId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookPatron_Patron_PatronId",
-                        column: x => x.PatronId,
-                        principalTable: "Patron",
-                        principalColumn: "PatronId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -261,23 +214,8 @@ namespace Library.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_UserId",
-                table: "Book",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookPatron_BookId",
-                table: "BookPatron",
-                column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookPatron_PatronId",
-                table: "BookPatron",
-                column: "PatronId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Patron_UserId",
-                table: "Patron",
+                name: "IX_Books_UserId",
+                table: "Books",
                 column: "UserId");
         }
 
@@ -299,16 +237,10 @@ namespace Library.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BookPatron");
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Book");
-
-            migrationBuilder.DropTable(
-                name: "Patron");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

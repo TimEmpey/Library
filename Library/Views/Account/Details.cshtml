@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models;
+@model IEnumerable<Library.Models.Book>;
+
+<h1>Your Books</h1>
+
+@if (@Model.Any())
+{
+<ul>
+  @foreach(Book book in Model)
+  {
+    <li>@Html.Label(book.Title)</li>
+    <ul>
+      <li>@Html.Label(book.Genre)</li>
+      <li>@Html.Label(book.AuthorFirst)</li>
+    </ul>
+  } 
+  </ul> 
+  }
+  else 
+  {
+    <h3>You have no books checked out!</h3>
+  }

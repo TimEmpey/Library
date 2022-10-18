@@ -3,25 +3,34 @@
 }
 
 @using Library.Models;
+@using System.Security.Claims
 
 <h1>Books</h1>
 
 @if (@Model.Count == 0)
 {
-  <h3>No Books have been checked out!</h3>
+  <h3>There are no book to checkout!</h3>
 } 
 
 <ul>
   @foreach(Book book in Model)
   {
-    <li>@Html.ActionLink($"{book.Title}", "Details", new { id = book.BookId })</li>
+    @if(book.UserId == null)
+    {
+    <li>@Html.Label(book.Title)</li>
     <ul>
-      <li>@Html.ActionLink($"{book.Genre}", "Details", new { id = book.BookId })</li>
-      <li>@Html.ActionLink($"{book.AuthorFirst}" + " " + $"{book.AuthorLast}", "Details", new { id = book.BookId })</li>
+      <li>@Html.Label(book.Genre)</li>
+      <li>@Html.Label(book.AuthorFirst)</li>
+      @using (Html.BeginForm("Checkout","Books", FormMethod.Post))
+      {
+        @Html.Hidden("UserId", @User.Identity.ToString())
+        @Html.Hidden("BookId", @book.BookId)
+        <button type="submit" class="btn btn-primary">Checkout</button>
+      }
     </ul>
-      
+    }
   }
 </ul>
 
-<p>@Html.ActionLink("Add new book", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("Add new book", "Create", null, null, new{@class="btn btn-primary"})</p>
+<p>@Html.ActionLink("Home", "Index", "Home", null, new{@class="btn btn-primary"})</p>

@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Book
+
+<h4>Add a new book</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.Raw("Title: ")
+    @Html.TextBoxFor(model => model.Title, new {placeholder="ex. The Martian"})
+
+    @Html.Raw("Genre: ")
+    @Html.TextBoxFor(model => model.Genre)
+
+    @Html.Raw("Author First: ")
+    @Html.TextBoxFor(model => model.AuthorFirst)
+    
+    @Html.Raw("Author Last: ")
+    @Html.TextBoxFor(model => model.AuthorLast)
+
+    <button type="submit" class="btn btn-primary">Add Book</button>
+}
+<p>@Html.ActionLink("Show all items", "Index")</p>

@@ -106,50 +106,7 @@ namespace Library.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Book");
-                });
-
-            modelBuilder.Entity("Library.Models.BookPatron", b =>
-                {
-                    b.Property<int>("BookPatronId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatronId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookPatronId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("PatronId");
-
-                    b.ToTable("BookPatron");
-                });
-
-            modelBuilder.Entity("Library.Models.Patron", b =>
-                {
-                    b.Property<int>("PatronId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("PatronFirst")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("PatronLast")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.HasKey("PatronId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Patron");
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -289,34 +246,6 @@ namespace Library.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Library.Models.BookPatron", b =>
-                {
-                    b.HasOne("Library.Models.Book", "Book")
-                        .WithMany("JoinBookPat")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Library.Models.Patron", "Patron")
-                        .WithMany("JoinBookPat")
-                        .HasForeignKey("PatronId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Patron");
-                });
-
-            modelBuilder.Entity("Library.Models.Patron", b =>
-                {
-                    b.HasOne("Library.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -366,16 +295,6 @@ namespace Library.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Library.Models.Book", b =>
-                {
-                    b.Navigation("JoinBookPat");
-                });
-
-            modelBuilder.Entity("Library.Models.Patron", b =>
-                {
-                    b.Navigation("JoinBookPat");
                 });
 #pragma warning restore 612, 618
         }

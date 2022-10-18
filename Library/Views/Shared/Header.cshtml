@@ -1,19 +1,21 @@
 <div id="header">
-  @Html.ActionLink("Home", "Index", "Home") | 
-  @Html.ActionLink("All Books", "Index", "Books") | 
-  @Html.ActionLink("All Items", "Index", "Items") |
-  <div id="header-right">
+  @using (Html.BeginForm("LogOff", "Account"))
+  {
+    @Html.ActionLink("All Books", "Index", "Books", null, new{@class="btn btn-link headbtn"})
+  
     @if (User.Identity.IsAuthenticated)
     {
-      @using (Html.BeginForm("LogOff", "Account"))
-      {
-        <input type="submit" class="btn btn-default" value="Log out" /> <span> |</span>
+      <span> | </span>@Html.ActionLink("Your Books", "Details", "Account", null, new{@class="btn btn-link headbtn"}) <span> | </span>
+
+      @Html.ActionLink("Account", "Index", "Account", null, new{@class="btn btn-link headbtn"})<span> | </span>
+
+      <input type="submit" value="Log out" class="btn btn-link" /> 
       }
-    }
+    
     else
     {
-      @Html.ActionLink("Register", "Register", "Accounts", new {@class="btn btn-primary"})<span> |</span>
-      @Html.ActionLink("Log in", "Login", "Accounts", new {@class="btn btn-primary"})<span> |</span>
+      <span> | </span>@Html.ActionLink("Register", "Register", "Account", null, new {@class="btn btn-link headbtn"})<span> |</span>
+      @Html.ActionLink("Log in", "Login", "Account", null, new {@class="btn btn-link headbtn"})<span></span>
     }
-  </div>
+  }
 </div>

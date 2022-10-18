@@ -3,16 +3,20 @@ using Microsoft.AspNetCore.Identity;
 using Library.Models;
 using System.Threading.Tasks;
 using Library.ViewModels;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace Library.Controllers
 {
-  public class AccountsController : Controller
+
+  public class AccountController : Controller
   {
     private readonly LibraryContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public AccountsController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, LibraryContext db)
+    public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, LibraryContext db)
     {
       _userManager = userManager;
       _signInManager = signInManager;
@@ -68,6 +72,14 @@ namespace Library.Controllers
       {
         return View();
       }
+    }
+
+    public async Task<ActionResult> Details()
+    {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userBooks = _db.Books.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      return View(userBooks);
     }
   }
 }

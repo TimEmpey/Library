@@ -1,17 +1,10 @@
-a, a:visited, a:hover{
-  color: black;
-}
-
-a.btn, a.btn-primary{
+.headbtn:visited, .headbtn, .headbtn:hover, .btn-link, .btn-link:visited, .btn-link:hover {
   color:white;
+  text-decoration: none;
 }
 
 ul{
   list-style: none;
-}
-
-.header-right{
-  float:right;
 }
 
 #bodycontent{
@@ -21,17 +14,18 @@ ul{
   background-size: 100vw;
 }
 
-#header {
+#header{
   width: 100%;
-  height: 5vh;
+  min-height: 2rem;
   padding-left: 0.5em;
   background-color: #0069d9;
+  color:white;
 }
 
 #renderbody{
   overflow-y:scroll;
   height: 90vh;
-  width:80%;
+  width: 80%;
   margin: auto;
   padding-left:1em;
   padding-right:1em;
@@ -39,9 +33,11 @@ ul{
 
 #footer {
   width: 100%;
-  top: 95vh;
-  left: 0px;
+  min-height: 2rem;
   padding-left: 0.5em;
   background-color: #0069d9;
-  height: 5vh;
+}
+
+body>a{
+  color:black;
 }
