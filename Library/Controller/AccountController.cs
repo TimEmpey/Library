@@ -6,6 +6,7 @@ using Library.ViewModels;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Library.Controllers
 {
@@ -78,7 +79,7 @@ namespace Library.Controllers
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      var userBooks = _db.Books.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      var userBooks = _db.Books.Where(entry => entry.Borrower == userId).ToList();
       return View(userBooks);
     }
   }

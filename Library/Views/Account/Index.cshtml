@@ -9,6 +9,8 @@
 @if (User.Identity.IsAuthenticated)
 {
   <p>Hello @User.Identity.Name!</p>
+
+
   @using (Html.BeginForm("LogOff", "Account"))
   {
     @Html.ActionLink("Checkout Books", "Index", "Books", null, new {@class="btn btn-primary"})

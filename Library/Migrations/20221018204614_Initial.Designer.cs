@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20221018170845_Initial")]
+    [Migration("20221018204614_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,6 +93,9 @@ namespace Library.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("AuthorLast")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Borrower")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Genre")
@@ -242,7 +245,7 @@ namespace Library.Migrations
             modelBuilder.Entity("Library.Models.Book", b =>
                 {
                     b.HasOne("Library.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Borrowed")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
@@ -297,6 +300,11 @@ namespace Library.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Library.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Borrowed");
                 });
 #pragma warning restore 612, 618
         }

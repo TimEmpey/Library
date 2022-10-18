@@ -15,15 +15,15 @@
 <ul>
   @foreach(Book book in Model)
   {
-    @if(book.UserId == null)
+    @if(book.Borrower == null)
     {
     <li>@Html.Label(book.Title)</li>
     <ul>
       <li>@Html.Label(book.Genre)</li>
       <li>@Html.Label(book.AuthorFirst)</li>
-      @using (Html.BeginForm("Checkout","Books", FormMethod.Post))
+      @using (Html.BeginForm("AddToUser","Books", FormMethod.Post))
       {
-        @Html.Hidden("UserId", @User.Identity.ToString())
+        @Html.Hidden("UserName", @User.Identity.Name)
         @Html.Hidden("BookId", @book.BookId)
         <button type="submit" class="btn btn-primary">Checkout</button>
       }

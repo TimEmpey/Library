@@ -163,7 +163,8 @@ namespace Library.Migrations
                     Genre = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     AuthorFirst = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     AuthorLast = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true)
+                    UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true),
+                    Borrower = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -6,7 +6,7 @@ namespace Library.Models
   {
     public Book()
     {
-      this.UserId = null; //null belongs to library
+      this.Borrower = null; //null belongs to library
     }
 
     public int BookId { get; set; }
@@ -15,6 +15,6 @@ namespace Library.Models
     public string AuthorFirst { get; set; }
     public string AuthorLast { get; set; }
     public virtual ApplicationUser User { get; set; }
-    public string UserId { get; set; }
+    public string Borrower { get; set; }
   }
 }

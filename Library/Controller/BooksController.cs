@@ -4,6 +4,7 @@ using Library.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Library.Controllers
 {
@@ -77,14 +78,17 @@ namespace Library.Controllers
     //     return View();
     //   }
 
-    //   [HttpPost]
-    //   public ActionResult AddToUser(int UserId, int BookId)
-    //   {
-    //     BookUser bookuser = new BookUser(){UserId = UserId, BookId = BookId};
-    //     _db.BookUser.Add(bookuser);
-    //     _db.SaveChanges();
-    //     return RedirectToAction("Index", "Books");
-    // }
-
+      [HttpPost]
+      public ActionResult AddToUser(string UserName, int BookId)
+      {
+        // get the book using book id
+        // set book's userid to userid
+        var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        Book myBook = _db.Books.FirstOrDefault(book => book.BookId == BookId);
+        myBook.Borrower = userId;
+        _db.Entry(myBook).State = EntityState.Modified;
+        _db.SaveChanges();
+        return RedirectToAction("Details", "Account");
+    }
   }
 }
