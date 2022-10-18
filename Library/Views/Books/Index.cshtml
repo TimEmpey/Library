@@ -20,7 +20,7 @@
     <li>@Html.Label(book.Title)</li>
     <ul>
       <li>@Html.Label(book.Genre)</li>
-      <li>@Html.Label(book.AuthorFirst)</li>
+      <li>@Html.Label(book.AuthorFirst) @Html.Label(book.AuthorLast)</li>
       @using (Html.BeginForm("AddToUser","Books", FormMethod.Post))
       {
         @Html.Hidden("UserName", @User.Identity.Name)

@@ -72,20 +72,22 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
-    // public ActionResult Checkout()
-    //   {
-    //     ViewBag.UserId = new SelectList(_db.Users, "UserId");
-    //     return View();
-    //   }
-
       [HttpPost]
       public ActionResult AddToUser(string UserName, int BookId)
       {
-        // get the book using book id
-        // set book's userid to userid
         var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         Book myBook = _db.Books.FirstOrDefault(book => book.BookId == BookId);
         myBook.Borrower = userId;
+        _db.Entry(myBook).State = EntityState.Modified;
+        _db.SaveChanges();
+        return RedirectToAction("Details", "Account");
+    }
+
+    [HttpPost]
+    public ActionResult RemoveFromUser (int BookId)
+    {
+        Book myBook = _db.Books.FirstOrDefault(book => book.BookId == BookId);
+        myBook.Borrower = null;
         _db.Entry(myBook).State = EntityState.Modified;
         _db.SaveChanges();
         return RedirectToAction("Details", "Account");

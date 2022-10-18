@@ -15,9 +15,14 @@
     <li>@Html.Label(book.Title)</li>
     <ul>
       <li>@Html.Label(book.Genre)</li>
-      <li>@Html.Label(book.AuthorFirst)</li>
+      <li>@Html.Label(book.AuthorFirst) @Html.Label(book.AuthorLast)</li>
+  @using (Html.BeginForm("RemoveFromUser","Books", FormMethod.Post))
+      {
+        @Html.Hidden("BookId", @book.BookId)
+        <button type="submit" class="btn btn-primary">Return</button>
+      }
     </ul>
-  } 
+    } 
   </ul> 
   }
   else 
